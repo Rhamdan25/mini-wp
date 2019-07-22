@@ -133,6 +133,7 @@ export default {
         },
         getFavouriteArticles(){
             this.filterFavourite = true
+            this.filterByUser = false
         },
     //forms
         login(email, password){

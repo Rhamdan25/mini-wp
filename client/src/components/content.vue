@@ -119,7 +119,6 @@ export default {
             })   
         },
         getUserArticles(){
-            this.getAllArticles()
             this.articles = this.articles.filter(article=>{
                 return article.author._id.includes(this.currentUser._id)
             })
@@ -128,8 +127,8 @@ export default {
             const userId = this.currentUser._id
             
             this.articles = this.articles.filter(function(article){
-                return article.favouritedBy.some(function(f){
-                    return f.userId == userId
+                article.favouritedBy.some(f=>{
+                    f.userId.includes(userId)
                 })
             })
         },
