@@ -6,7 +6,7 @@
                 <button class= "btn"><i class="fas fa-search"></i></button>
                 <div class="article-list col col-sm-10" >
                     <ul class="list-group list-group-flush" >
-                        <li  v-for="article in filteredList" class="list-group-item">
+                        <li  v-for="article in filteredList" :key="article._id" class="list-group-item">
                             <div class="row">
                                 <div class= "col col-sm-9">
                                     <h4 class="article-title">{{article.title}}</h4>
@@ -126,12 +126,12 @@ export default {
         getFavouriteArticles(){
             const userId = this.currentUser._id
             
-            this.articles = this.articles.filter(function(article){
-                article.favouritedBy.some(f=>{
-                    f.userId.includes(userId)
+            this.articles = this.articles.filter(article=>{
+                return article.favouritedBy.some(f=>{
+                    return f.userId.includes(userId)
                 })
             })
-        },
+        }
 
     },
     mounted(){
@@ -157,6 +157,11 @@ export default {
                 this.getFavouriteArticles()
             } else {
                 this.getAllArticles()
+            }
+        },
+        mainContent: function(newVal, oldVal){
+            if(newVal ==true){
+                this.getAllArticles
             }
         }
     }
